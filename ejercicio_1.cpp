@@ -2,6 +2,8 @@
 #include <windows.h>
 #include <string.h>
 using namespace std;
+#include <iostream>
+
 #define SIZE 4096
 
 int main() {
@@ -17,7 +19,7 @@ int main() {
             TEXT("SharedMemory"));
 
     if (hMapFile == NULL) {
-        printf("Could not create file mapping object (%d).\n", GetLastError());
+        cout << ("Could not create file mapping object (%d).\n", GetLastError());
         return 1;
     }
 
@@ -28,7 +30,7 @@ int main() {
                                  SIZE);
 
     if (pBuf == NULL) {
-        printf("Could not map view of file (%d).\n", GetLastError());
+        cout << ("Could not map view of file (%d).\n", GetLastError());
 
         CloseHandle(hMapFile);
         return 1;
@@ -56,7 +58,7 @@ int main() {
             &si,
             &pi
     )) {
-        printf("CreateProcess failed (%d).\n", GetLastError());
+        cout << ("CreateProcess failed (%d).\n", GetLastError());
 
         UnmapViewOfFile(pBuf);
         CloseHandle(hMapFile);
@@ -67,7 +69,7 @@ int main() {
     WaitForSingleObject(pi.hProcess, INFINITE);
 
 
-    printf("Child reads: %s\n", pBuf);
+    cout << ("Child reads: %s\n", pBuf);
 
     UnmapViewOfFile(pBuf);
     CloseHandle(hMapFile);

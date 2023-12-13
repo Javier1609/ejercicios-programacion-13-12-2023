@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <windows.h>
 #include <string.h>
+#include<iostream>
 using namespace std;
-#include <iostream>
+
 
 #define SIZE 4096
 
